@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/Guanjian104/go-mall/common/logger"
 	"github.com/Guanjian104/go-mall/config"
 	"net/http"
 
@@ -20,6 +21,10 @@ func main() {
 	g.GET("/config-read", func(c *gin.Context) {
 		app := config.App
 		database := config.Database
+
+		//TODO: 暂时测试用，后面删掉
+		logger.ZapLoggerTest(c)
+
 		c.JSON(http.StatusOK, gin.H{
 			"env": 		app.Env,
 			"type":     database.Type,
