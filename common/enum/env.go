@@ -1,7 +1,7 @@
 package enum
 
 const (
-	ModeDev  = "dev"
-	ModeTest = "test"
-	ModeProd = "prod"
+    ModeDev  = "dev"
+    ModeTest = "test"
+    ModeProd = "prod"
 )
