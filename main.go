@@ -15,7 +15,7 @@ func main() {
 
     logger.Init()
 
-    g.Use(gin.Logger(), middleware.StartTrace())
+    g.Use(gin.Logger(), middleware.StartTrace(), middleware.LogAccess(), middleware.GinPanicRecovery())
     g.GET("/ping", func(c *gin.Context) {
         c.JSON(http.StatusOK, gin.H{
             "message": "pong",
@@ -35,6 +35,22 @@ func main() {
         logger.Info(c, "logger test", "key", "keyName", "val", 3)
         c.JSON(http.StatusOK, gin.H{
             "status": "ok",
+        })
+    })
+
+    g.POST("/access-log-test", func(c *gin.Context) {
+        c.JSON(http.StatusOK, gin.H{
+            "status": "ok",
+        })
+    })
+
+    g.GET("/panic-log-test", func(c *gin.Context) {
+        var a map[string]string
+        // TODO: panic 测试接口，需要的时候在这里 Panic 一下
+        // a["k"] = "v"
+        c.JSON(http.StatusOK, gin.H{
+            "status": "ok",
+            "data": a,
         })
     })
 
