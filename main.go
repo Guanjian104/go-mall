@@ -1,17 +1,19 @@
 package main
 
 import (
-	"net/http"
+    "net/http"
 
-	"github.com/Guanjian104/go-mall/common/logger"
-	"github.com/Guanjian104/go-mall/common/middleware"
-	"github.com/Guanjian104/go-mall/config"
+    "github.com/Guanjian104/go-mall/common/logger"
+    "github.com/Guanjian104/go-mall/common/middleware"
+    "github.com/Guanjian104/go-mall/config"
 
-	"github.com/gin-gonic/gin"
+    "github.com/gin-gonic/gin"
 )
 
 func main() {
     g := gin.New()
+
+    logger.Init()
 
     g.Use(gin.Logger(), middleware.StartTrace())
     g.GET("/ping", func(c *gin.Context) {
@@ -30,7 +32,7 @@ func main() {
     })
 
     g.GET("/logger-test", func(c *gin.Context) {
-        logger.New(c).Info("logger test", "key", "keyName", "val", 2)
+        logger.Info(c, "logger test", "key", "keyName", "val", 3)
         c.JSON(http.StatusOK, gin.H{
             "status": "ok",
         })
